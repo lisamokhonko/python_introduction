@@ -7,15 +7,20 @@
 #общее количество зерен, которое должен был бы отдать раджа изобретателю
 #было больше 1 000 000 зерен и сколько конкретно зерен он должен был бы отдать.
 
+import math
+
 def chess_reward(): # returns 2 ints (cell number and total number of corns)
-    current_number = 2
-    current_cell = 2
+    start_number = 1
+    start_cell = 1
+    q = 2
+    current_number = start_number
+    current_cell = start_cell
     while current_number < 1000000:
-        if current_number**2 < 1000000:
-            current_number = current_number**2
+        if current_number < 1000000:
+            current_number = current_number + pow(2, current_cell)
             current_cell += 1
         else:
             break
-    return current_number, current_cell
+    return current_cell, current_number
 
 print(chess_reward())
