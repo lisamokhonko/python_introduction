@@ -16,11 +16,11 @@ def chess_reward(): # returns 2 ints (cell number and total number of corns)
     current_number = start_number
     current_cell = start_cell
     while current_number < 1000000:
-        if current_number < 1000000:
+        #if current_number < 1000000:
             current_number = current_number + pow(2, current_cell)
             current_cell += 1
-        else:
-            break
+        #else:
+         #   break
     return current_cell, current_number
 
 print(chess_reward())
