@@ -7,10 +7,22 @@
 import random
 
 def gen_password(): # returns string
-    psw = ''
-    # предварительно создаем переменную
-    for _ in range(8):
-        psw = psw + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_'))
-    return psw
+    symbols_letters_upper = 'QWERTYUIOPASDFGHJKLZXCVBNM'
+    symbols_letters_lower = 'qwertyuiopasdfghjklzxcvbnm'
+    symbols_digits = '0123456789'
+    passkey = ''
+    passkey += passkey.join(random.choice(symbols_letters_upper))
+    passkey += passkey.join(random.choice(symbols_letters_lower))
+    passkey += passkey.join(random.choice(symbols_digits))
+    symbols_letters_upper = symbols_letters_upper.join('_')
+    #print(passkey)
+    for i in range(5):
+        if random.choice([1, 2, 3]) == 1:
+            passkey += passkey.join(random.choice(symbols_letters_upper))
+        elif random.choice([1, 2, 3]) == 2:
+            passkey += passkey.join(random.choice(symbols_letters_lower))
+        else:
+            passkey += passkey.join(random.choice(symbols_digits))
+    return ''.join(random.sample(passkey, len(passkey)))
 
 print(gen_password())
