@@ -3,31 +3,28 @@
 
 import random
 from enum import Enum
-class Game(Enum):
-    ROCK = 0
-    PAPPER = 1
-    SCISSORS = 2
+from enum import IntEnum
 
+Game = IntEnum('Game', 'ROCK PAPPER SCISSORS LIZARD SPOCK')
+
+GREETING_BODY = '\n    '.join(['%d - %s' % (elem.value, elem.name) for elem in Game])
 GREETING = '''
-Enter data 
-    0 - ROCK
-    1 - PAPPER
-    2 - SCISSORS
-    \'q\' for exit: '''
-
+Enter data
+    %s
+    \'q\' for exit: ''' % GREETING_BODY
 # ROCK = 0
 # PAPPER = 1
 # SCISSORS = 2
 
-print(Game.ROCK.value)
+#print(Game.ROCK.value)
 
-def code2text(code):
-    if code == Game.ROCK.value:
-        return 'ROCK'
-    elif code == Game.PAPPER.value:
-        return 'PAPPER'
-    elif code == Game.SCISSORS.value:
-        return 'SCISSORS'
+# def code2text(code):
+#     if code == Game.ROCK.value:
+#         return 'ROCK'
+#     elif code == Game.PAPPER.value:
+#         return 'PAPPER'
+#     elif code == Game.SCISSORS.value:
+#         return 'SCISSORS'
 
 
 def who_is_winner(pc_choice, user_choice):
@@ -37,8 +34,23 @@ def who_is_winner(pc_choice, user_choice):
         return False
     if pc_choice == Game.SCISSORS and user_choice == Game.PAPPER:
         return False
+    if pc_choice == Game.ROCK and user_choice == Game.LIZARD:
+        return False
+    if pc_choice == Game.LIZARD and user_choice == Game.SPOCK:
+        return False
+    if pc_choice == Game.SPOCK and user_choice == Game.SCISSORS:
+        return False
+    if pc_choice == Game.SCISSORS and user_choice == Game.LIZARD:
+        return False
+    if pc_choice == Game.LIZARD and user_choice == Game.PAPPER:
+        return False
+    if pc_choice == Game.PAPPER and user_choice == Game.SPOCK:
+        return False
+    if pc_choice == Game.SPOCK and user_choice == Game.ROCK:
+        return False
     return True
 
+#print(who_is_winner(0,2))
 
 def game():
 
@@ -47,28 +59,29 @@ def game():
         if input_data == 'q':
             break
 
-        if not input_data.isnumeric():
+        if int(input_data) not in [elem.value for elem in Game]:
             print('Invalid data')
             continue
 
-        if not Game.ROCK.value <= int(input_data) <= Game.SCISSORS.value:
-            print('Invalid data')
-            continue
+        # if not Game.ROCK.value <= int(input_data) <= Game.SCISSORS.value:
+        #     print('Invalid data')
+        #     continue
+        pc_choice = random.choice(list(Game))
+        user_choice = Game(int(input_data))
 
-        pc_choice = random.randint(Game.ROCK.value, Game.SCISSORS.value)
-        user_choice = int(input_data)
+        #pc_choice = random.randint(Game.ROCK.value, Game.SCISSORS.value)
+        #user_choice = int(input_data)
 
-        print('PC choice: %s' % code2text(pc_choice))
+        print('PC choice: %s' % pc_choice.name)
         if pc_choice == user_choice:
             print('Tie')
         else:
             if who_is_winner(pc_choice, user_choice):
                 print('User is winner: %s vs %s' %
-                      (code2text(pc_choice),
-                       code2text(user_choice)))
+                      (pc_choice.name,
+                       user_choice.name))
             else:
                 print('PC is winner: %s vs %s' %
-                      (code2text(pc_choice),
-                       code2text(user_choice)))
-
+                      (pc_choice.name,
+                       user_choice.name))
 game()
