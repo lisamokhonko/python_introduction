@@ -10,6 +10,7 @@ text = '''
 на третью — четыре зерна и т. д. Оказалось, что такого количества зерна нет на всей планете
 '''
 text = re.sub(r'[^\w\s]','',text)
+#text = 'Согласно'
 #text_list = text.split()
 #print(text_list)
 
@@ -17,18 +18,28 @@ def pemrtuate(text): # returns permuted text
     text_list = text.split()
     decoded_text = ''
     mixed_word = ''
+    first_letter = ''
+    last_letter = ''
+    window_left = 1
+    window_right = 0
     for elem in text_list:
         if len(elem) > 3:
-            #for i in range(len(elem)):
-            mixed_word = list(elem)# + elem[-1])
-            #print(mixed_word)
-            mixed_word_part = mixed_word[1:-1]
-            random.shuffle(mixed_word_part)
-            #print(mixed_word_part)
-            mixed_word = ''.join(mixed_word[0]) + ''.join(mixed_word_part) + ''.join(mixed_word[-1])
-            #print(mixed_word)
-            decoded_text += mixed_word + ' '
-            continue
+            decoded_text = elem[0]
+            last_letter = elem[-1]
+            while window_right <= (len(elem) - 2):
+                if window_left + 3 <= len(elem) - 2:
+                    window_right = window_left + 3
+                    mixed_word = list(elem)
+                    mixed_word_part = mixed_word[window_left:window_right]
+                    #print(mixed_word_part)
+                    random.shuffle(mixed_word_part)
+                    #print(mixed_word_part)
+                    decoded_text += ''.join(mixed_word_part)
+                    window_left = window_right
+                    print(decoded_text)
+                else:
+                    pass
+            #break
         else:
             decoded_text += elem + ' '
     print(decoded_text)
