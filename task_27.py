@@ -1,6 +1,7 @@
 #Task #27
 
 import re
+import math
 import random
 
 text = '''
@@ -14,34 +15,32 @@ text = re.sub(r'[^\w\s]','',text)
 #text_list = text.split()
 #print(text_list)
 
+
 def pemrtuate(text): # returns permuted text
     text_list = text.split()
     decoded_text = ''
-    mixed_word = ''
-    first_letter = ''
-    last_letter = ''
-    window_left = 1
-    window_right = 0
+
+    def permtuate_word(word):
+        first, last = word[0], word[-1]
+        decoded_word = ''
+        middle = word[1:-1]
+        old_i = 0
+        sub_middle_sh = ''
+        for i in range(math.ceil(len(middle) / 3)):
+            sub_middle = list(middle[old_i:old_i + 3])
+            random.shuffle(sub_middle)
+            sub_middle_sh = ''.join(sub_middle)
+            old_i += 3
+            decoded_word += sub_middle_sh
+        decoded_word = first + decoded_word + last
+        return decoded_word
+
     for elem in text_list:
         if len(elem) > 3:
-            decoded_text = elem[0]
-            last_letter = elem[-1]
-            while window_right <= (len(elem) - 2):
-                if window_left + 3 <= len(elem) - 2:
-                    window_right = window_left + 3
-                    mixed_word = list(elem)
-                    mixed_word_part = mixed_word[window_left:window_right]
-                    #print(mixed_word_part)
-                    random.shuffle(mixed_word_part)
-                    #print(mixed_word_part)
-                    decoded_text += ''.join(mixed_word_part)
-                    window_left = window_right
-                    print(decoded_text)
-                else:
-                    pass
-            #break
+            decoded_text += permtuate_word(elem) + ' '
+
         else:
             decoded_text += elem + ' '
-    print(decoded_text)
+    return decoded_text
 
-pemrtuate(text)
+print(pemrtuate(text))
