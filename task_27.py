@@ -26,11 +26,12 @@ def pemrtuate(text): # returns permuted text
         middle = word[1:-1]
         old_i = 0
         sub_middle_sh = ''
-        for i in range(math.ceil(len(middle) / 3)):
-            sub_middle = list(middle[old_i:old_i + 3])
+        window = 3
+        for i in range(math.ceil(len(middle) / window)):
+            sub_middle = list(middle[old_i:old_i + window])
             random.shuffle(sub_middle)
             sub_middle_sh = ''.join(sub_middle)
-            old_i += 3
+            old_i += window
             decoded_word += sub_middle_sh
         decoded_word = first + decoded_word + last
         return decoded_word
