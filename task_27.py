@@ -19,6 +19,7 @@ text = re.sub(r'[^\w\s]','',text)
 def pemrtuate(text): # returns permuted text
     text_list = text.split()
     decoded_text = ''
+    window = 3
 
     def permtuate_word(word):
         first, last = word[0], word[-1]
@@ -26,7 +27,7 @@ def pemrtuate(text): # returns permuted text
         middle = word[1:-1]
         old_i = 0
         sub_middle_sh = ''
-        window = 3
+
         for i in range(math.ceil(len(middle) / window)):
             sub_middle = list(middle[old_i:old_i + window])
             random.shuffle(sub_middle)
@@ -37,7 +38,7 @@ def pemrtuate(text): # returns permuted text
         return decoded_word
 
     for elem in text_list:
-        if len(elem) > 3:
+        if len(elem) > window:
             decoded_text += permtuate_word(elem) + ' '
 
         else:
