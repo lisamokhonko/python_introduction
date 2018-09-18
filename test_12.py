@@ -11,21 +11,16 @@ import random
 
 def summer_test(): #-> list
 	all_test_list = []
-	unique_test_list = []
-	duplicate_idx = []
 	test_from = 2
 	test_till = 9
 	for i in range(test_from, test_till + 1):
 		for j in range(test_from, test_till + 1):
-			all_test_list.append([i, j, i*j])
-	for i in range(len(all_test_list)):
-		for j in range(len(all_test_list)):
-			if (all_test_list[i][0] == all_test_list[j][1]) and (all_test_list[i][1] == all_test_list[j][0]):
-				duplicate_idx.append(i)
-				#print(all_test_list[i][0], all_test_list[j][1], ':', all_test_list[i][1], all_test_list[j][0])
-
-	print(all_test_list)
-	print(duplicate_idx)
+			if j >= i:
+				all_test_list.append([i, j, i*j])
+	print(type(all_test_list))
+	return random.sample(all_test_list, 15)
 
 
-summer_test()
+
+
+print(summer_test())
