@@ -14,10 +14,6 @@ def normalize(lst): #-> list
         else:
             max_elem
     coeff = max_elem/1
-    if lst[0] > 0:
-        coeff
-    else:
-        coeff *= -1
     norm_matrix = []
     norm_matrix.append(lst[0]/coeff)
     for i in range(1, len(lst)):
