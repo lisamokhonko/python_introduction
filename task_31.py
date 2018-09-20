@@ -135,7 +135,7 @@ def delete_entry_name_phonebook():
 def delete_entry_under_age():
     adult_age = int(input("Enter Age: "))
     len_pb = len(phone_book)
-    for idx in range(len_pb-1, 0, -1):
+    for idx in range(len_pb-1, -1, -1):
         dict = phone_book[idx]
         for key in dict:
             if key == 'age':
