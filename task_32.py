@@ -41,9 +41,11 @@ def count_words(file_path_text, file_path_stop_words, top_n): # returns list of 
     # for key in sorted(words_dict.keys(), key=words_dict.get(key), reverse=True):
     #     print('%s -> %s' % (key, words_dict[key]))
     #pprint.pprint(sorted_by_value)
-    result_list = []
+    result_list = [sorted_by_value[i][0] for i in range(top_n)]
+
     for i in range(top_n):
-        result_list += sorted_by_value[i]
-    print(result_list)
+        print(sorted_by_value[i][0])
+        #result_list += sorted_by_value[i]
+    #print(result_list)
     return result_list
 count_words(file_path_text, file_path_stop_words, top_n)
