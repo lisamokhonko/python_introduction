@@ -16,7 +16,7 @@ class Circle:
 
     def is_point_in_circle(self, point):
         is_belong = True
-        if math.sqrt(point.x - self.x) + math.sqrt(point.y - self.y) <= math.sqrt(self.radius):
+        if math.sqrt(abs(point.x - self.x)) + math.sqrt(abs(point.y - self.y)) <= math.sqrt(self.radius):
             is_belong = True
         else:
             is_belong = False
@@ -24,4 +24,7 @@ class Circle:
 
 circle1 = Circle(0, 0, 5)
 point1 = Point(1, 1)
+p = Point(0, 0)
+c = Circle(1, 1, 1)
 print(circle1.is_point_in_circle(point1))
+print(c.is_point_in_circle(p))
